@@ -29,6 +29,9 @@ public class LoginPageTest  extends  Initializedriver{
     @Test(priority = 0,retryAnalyzer = RetryAnalyzer.class,dataProvider = "emaildata")
     public  void Login(String email) throws InterruptedException {
         login.EnteremailAndClickEnterKey(email);
+
+
+
         Assert.assertTrue(
                 login.TextVerification() || login.InvalidAdd(),
                 "Neither the expected text nor the invalid email message is visible."
