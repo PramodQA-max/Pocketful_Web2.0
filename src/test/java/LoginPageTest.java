@@ -26,7 +26,6 @@ public class LoginPageTest  extends  Initializedriver{
 
     }
 
-
     @Test(priority = 0,retryAnalyzer = RetryAnalyzer.class,dataProvider = "emaildata")
     public  void Login(String email) throws InterruptedException {
         login.EnteremailAndClickEnterKey(email);
@@ -37,7 +36,6 @@ public class LoginPageTest  extends  Initializedriver{
                 "Neither the expected text nor the invalid email message is visible."
         );
         Thread.sleep(2000);
-
 
 //        Assert.assertTrue(login.TextVerification(),"Access your account securely. Scan, sign in, and start trading!  is not Visible");
 //        Assert.assertTrue(login.InvalidAdd(),"Invalid email address!  is not Visible");
