@@ -31,7 +31,6 @@ public class LoginPageTest  extends  Initializedriver{
         login.EnteremailAndClickEnterKey(email);
 
 
-
         Assert.assertTrue(
                 login.TextVerification() || login.InvalidAdd(),
                 "Neither the expected text nor the invalid email message is visible."
