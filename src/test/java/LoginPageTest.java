@@ -36,6 +36,7 @@ public class LoginPageTest  extends  Initializedriver{
         );
         Thread.sleep(2000);
 
+
 //        Assert.assertTrue(login.TextVerification(),"Access your account securely. Scan, sign in, and start trading!  is not Visible");
 //        Assert.assertTrue(login.InvalidAdd(),"Invalid email address!  is not Visible");
         driver.navigate().refresh();
