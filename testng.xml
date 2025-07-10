@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PocketfulWebAutomation Suite" parallel="methods" thread-count="2">
+<!--  <listeners>-->
+<!--	<listener class-name="pocketfulwebAutomation.listeners.MyListener"></listener>-->
+<!--      <listener class-name="Listerner.Listener"></listener>-->
+<!--  </listeners>-->
+
+  
+
+  <test name="RegularIntraday">
+    <classes>
+        <class name="PocketfulWeb.Main"/>
+    </classes>
+</test>
+
+<!--
+ <test name="RegularLongeterm">
+    <classes>
+        <class name="pocketfulwebAutomation.RegularLongeterm.RegularLongeterm">
+           
+        </class>
+    </classes>
+</test>
+-->
+<!--<test name="StopLoss">-->
+<!--    <classes>-->
+<!--        <class name="pocketfulwebAutomation.StopLossOrder.StoplossOrder"> -->
+<!--        </class>-->
+<!--    </classes>-->
+<!--</test>-->
+
+<!--<test name="CoverOrder">-->
+<!--    <classes>-->
+<!--        <class name="pocketfulwebAutomation.Coverorder.CoverOrder"> -->
+<!--        </class>-->
+<!--    </classes>-->
+<!--</test>-->
+
+<!--<test name="AMOOrder">-->
+<!--    <classes>-->
+<!--        <class name="pocketfulwebAutomation.AMOOrder.AMOOrder">-->
+<!--&lt;!&ndash;            <methods>&ndash;&gt;-->
+<!--&lt;!&ndash;                <include name="verifyNSEIntradayAMORegularOrder"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <include name="verifyNSEIntradayAMOLimitOrderCurrentPrice"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </methods>&ndash;&gt;-->
+<!--        </class>-->
+<!--    </classes>-->
+<!--</test>-->
+<!--    <test name="GTTrder">-->
+<!--        <classes>-->
+<!--            <class name="pocketfulwebAutomation.GttOrder.GTTOrder">-->
+<!--                <methods>-->
+<!--                    <include name="PlaceGTTSellOrderWhereTriggerPriceIsgreaterthanPrice"/>-->
+
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite> 
