@@ -41,6 +41,7 @@ public class LoginPageTest  extends  Initializedriver{
         driver.navigate().refresh();
     }
 
+
     @Test(priority = 1,retryAnalyzer = RetryAnalyzer.class)
     public void LoginPageverification()
     {
