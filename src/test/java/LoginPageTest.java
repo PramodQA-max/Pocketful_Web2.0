@@ -62,4 +62,10 @@ public class LoginPageTest  extends  Initializedriver{
         Assert.assertTrue(login.LoginPageUIVerification(),"Image is not Visible On Login Page");
     }
 
+    @Test
+    public void Browserclose()
+    {
+        driver.quit();
+    }
+
 }
