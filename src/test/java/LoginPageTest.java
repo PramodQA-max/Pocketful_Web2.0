@@ -65,6 +65,7 @@ public class LoginPageTest  extends  Initializedriver{
     @Test
     public void Browserclose()
     {
+
         driver.quit();
     }
 
