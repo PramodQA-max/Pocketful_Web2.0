@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/PramodQA-max/web-automation:${{ steps.version.outputs.new_version }}
+          tags: ghcr.io/pramodQA-max/web-automation:${{ steps.version.outputs.new_version }}
