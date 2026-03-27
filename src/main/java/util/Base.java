@@ -84,7 +84,7 @@ public class Base {
     }
 
     public static String uploadReportToS3(String sourcePath) {
-        readSecretFile("src/test/java/DaoAPI/jsonConfig/config.json");
+        readSecretFile("src/main/java/jsonconfig/config.json");
 
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
 
@@ -96,12 +96,28 @@ public class Base {
 
         // File to upload
         File reportFile = new File(sourcePath);
+        if (!reportFile.exists()) {
+            System.err.println("❌ ERROR: Source report file does not exist at: " + reportFile.getAbsolutePath());
+            return null;
+        }
+
+        System.out.println("📂 Source file found: " + reportFile.getAbsolutePath() + " (" + reportFile.length() + " bytes)");
+
         String fileName = reportFile.getName();
         fileName = fileName.replace(".html", "") + formattedDateTime + ".html";
 
+        System.out.println("🚀 Uploading to S3 Bucket: [" + bucketName + "] in Region: [" + REGION + "]");
+        System.out.println("📄 Destination S3 Key: " + fileName);
 
         // Upload file to S3
-        s3Client.putObject(new PutObjectRequest(bucketName, fileName, reportFile));
+        try {
+            s3Client.putObject(new PutObjectRequest(bucketName, fileName, reportFile));
+            System.out.println("✅ Successfully uploaded to S3.");
+        } catch (Exception e) {
+            System.err.println("❌ S3 PutObject failed: " + e.getMessage());
+            throw e;
+        }
+
         return fileName;
     }
 
@@ -127,7 +143,7 @@ public class Base {
     public static void deleteReportFromS3() {
         try {
             // Specify your AWS credentials
-            String configFilePath = "src/test/java/DaoAPI/jsonConfig/config.json";
+            String configFilePath = "src/main/java/jsonconfig/config.json";
             readSecretFile(configFilePath);
 
             // Initialize S3 client with your credentials
@@ -168,7 +184,7 @@ public class Base {
         String formattedDateTime = currentDateTime.format(formatter);
     
         StringBuilder contentBuilder = new StringBuilder();
-        contentBuilder.append("**Test Report for DAO API Automation** - ").append(formattedDateTime).append("\\n\\n");
+        contentBuilder.append("**Test Report for Web 2.0 Automation** - ").append(formattedDateTime).append("\\n\\n");
     
         for (String[] array : combinedArray) {
             String apiTest = array[0];
@@ -178,7 +194,7 @@ public class Base {
             String skipTest = array[4];
             String warningTest = array[5];
     
-            contentBuilder.append("**API Test Name:** ").append(apiTest).append("\\n")
+            contentBuilder.append("**Test Name:** ").append(apiTest).append("\\n")
                           .append("**Total Test:** ").append(totalTest).append("\\n")
                           .append("**Pass Test:** ").append(passTest).append("\\n")
                           .append("**Fail Test:** ").append(failTest).append("\\n")
@@ -194,7 +210,7 @@ public class Base {
     
         // Add the report link at the end
         String s3HtmlFileUrl = "https://" + bucketName + ".s3.amazonaws.com/" + sourceFileName;
-        contentBuilder.append("[**DAO API Automation Report Link**](").append(s3HtmlFileUrl).append(")");
+        contentBuilder.append("[**Web 2.0 Automation Report Link**](").append(s3HtmlFileUrl).append(")");
     
         // Send any remaining content in the contentBuilder
         if (contentBuilder.length() > 0) {

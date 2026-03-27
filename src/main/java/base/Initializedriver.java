@@ -8,8 +8,10 @@ import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Browser.NewContextOptions;
 
 /**
- * Manages Playwright resources (Playwright, Browser, Context, Page) using ThreadLocal.
- * This ensures that each running test thread has its own isolated and dedicated browser instance,
+ * Manages Playwright resources (Playwright, Browser, Context, Page) using
+ * ThreadLocal.
+ * This ensures that each running test thread has its own isolated and dedicated
+ * browser instance,
  * which is mandatory for stable parallel test execution.
  */
 public class Initializedriver {
@@ -21,15 +23,27 @@ public class Initializedriver {
     private static ThreadLocal<Page> tlPage = new ThreadLocal<>();
 
     // --- Accessor Methods (Getters) ---
-    public static Playwright getPlaywright() { return tlPlaywright.get(); }
-    public static Browser getBrowser() { return tlBrowser.get(); }
-    public static BrowserContext getContext() { return tlContext.get(); }
-    public static Page getPage() { return tlPage.get(); }
+    public static Playwright getPlaywright() {
+        return tlPlaywright.get();
+    }
 
+    public static Browser getBrowser() {
+        return tlBrowser.get();
+    }
+
+    public static BrowserContext getContext() {
+        return tlContext.get();
+    }
+
+    public static Page getPage() {
+        return tlPage.get();
+    }
 
     /**
-     * Initializes the Playwright session (Playwright, Browser, Context) only once per thread.
+     * Initializes the Playwright session (Playwright, Browser, Context) only once
+     * per thread.
      * Subsequent calls within the same thread return the existing Page object.
+     * 
      * @return The active Playwright Page instance for the current thread.
      */
     public static Page initialize() {
@@ -41,14 +55,12 @@ public class Initializedriver {
 
             // 2. Launch Browser
             Browser browser = getPlaywright().chromium().launch(
-                    new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(2000)
-            );
+                    new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(2000));
             tlBrowser.set(browser);
 
             // 3. Create Context
             BrowserContext context = getBrowser().newContext(
-                    new NewContextOptions().setViewportSize(1366, 768)
-            );
+                    new NewContextOptions().setViewportSize(1366, 768));
             tlContext.set(context);
 
             // 4. Create Page and Navigate
@@ -60,8 +72,10 @@ public class Initializedriver {
     }
 
     /**
-     * Closes the Playwright session and removes the ThreadLocal variables for the current thread.
-     * This is crucial for resource cleanup and memory management after a test execution.
+     * Closes the Playwright session and removes the ThreadLocal variables for the
+     * current thread.
+     * This is crucial for resource cleanup and memory management after a test
+     * execution.
      */
     public static void close() {
         // Safely close the browser and Playwright instances
@@ -72,7 +86,8 @@ public class Initializedriver {
             getPlaywright().close();
         }
 
-        // CRITICAL: Remove the ThreadLocal references to free resources and prepare for the next run
+        // CRITICAL: Remove the ThreadLocal references to free resources and prepare for
+        // the next run
         tlPage.remove();
         tlContext.remove();
         tlBrowser.remove();

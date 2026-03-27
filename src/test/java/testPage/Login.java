@@ -57,6 +57,7 @@ public class Login extends Initializedriver {
     @Test(priority = 0)
     public void UIVerifyOnLoginWithEmailId() {
         ExtentTest test = extent.createTest("Verify Login Page UI").assignAuthor("UI Tests");
+        ExtentManager.setTest(test);
 
         verifyElementVisibility(test, "Login Text", loginpage.isLoginTextVisible());
         verifyElementVisibility(test, "Access your account securely. Scan, sign in, and start trading!", loginpage.isLoginText1Visible());
@@ -70,6 +71,7 @@ public class Login extends Initializedriver {
 
     private void verifyElementVisibility(ExtentTest parentTest, String elementName, boolean visible) {
         ExtentTest node = parentTest.createNode("Verify " + elementName);
+        ExtentManager.setTest(node);
         node.assignCategory("UI Verification");
 
         Assert.assertTrue(visible, elementName + " is not visible");
@@ -85,6 +87,7 @@ public class Login extends Initializedriver {
     public void VerifyContinueWithGoogleAndVerifyPageNavigation()
 {
     ExtentTest test = extent.createTest("VerifyContinueWithGoogleAndVerifyPageNavigation").assignAuthor("Continue With Google Button Functionality");
+    ExtentManager.setTest(test);
     boolean isTextVisible = loginpage.gettext();
     Assert.assertTrue(isTextVisible, "Google Sign in text not visible");
     test.info("Navigated to Google Login Page. Current URL: " + loginpage.getnewpageurl());
@@ -96,6 +99,7 @@ public class Login extends Initializedriver {
     public void ClickOnCreateAccountlink()
     {
        ExtentTest test = extent.createTest( "CreateAccountlinkNavigation").assignAuthor("Create Account Link Functionality");
+       ExtentManager.setTest(test);
         boolean isTextVisible = loginpage.gettextofCreateAccount();
         Assert.assertTrue(isTextVisible, "Create Your Account text not visible");
         test.info("Navigated to Create Account Page. Current URL: " + loginpage.getnewpageurl());
@@ -109,6 +113,7 @@ public class Login extends Initializedriver {
     public void EnterEmailidTest(String email) {
         logger.info("Entering Login ID");
         ExtentTest test = extent.createTest("Login With Email ID").assignAuthor("EnterEmailidTest");
+        ExtentManager.setTest(test);
         System.out.println(email);
         page.navigate("https://web.pocketful.in/trading/login");
        // page.navigate("https://web.pocketful.in/trading/login");
@@ -117,6 +122,7 @@ public class Login extends Initializedriver {
 
     private void verify(ExtentTest parentTest,String msg,String testname, String email, String expectedError) {
         ExtentTest node = parentTest.createNode(testname);
+        ExtentManager.setTest(node);
         node.assignCategory("Verify Email: " + email);
         if(email != null || !email.isEmpty())
         {
@@ -136,6 +142,7 @@ public class Login extends Initializedriver {
 public void EnterPassword()
 {
     ExtentTest test = extent.createTest("Verify Enter Password Page UI").assignAuthor("UI Tests");
+    ExtentManager.setTest(test);
     UIVerifyOnEnterPassword(test);
     VerifyForgotPassword(test);
     loginpage.password("", passwordInput);
@@ -226,6 +233,7 @@ public void EnterPassword()
     @Test(priority = 5)
     public void LoginWithOTP() throws InterruptedException {
          ExtentTest test = extent.createTest( "LoginWithOTP").assignAuthor("Login With OTP Functionality");
+         ExtentManager.setTest(test);
        // EnterEmailidTest();
          loginpage.clickOnLoginwithOTP();
          verifyElementVisibility(test, "'Access your account securely. Enter the OTP to start trading!' Text Visible", loginpage.isLoginwithOTPtextVisible());
@@ -240,6 +248,7 @@ public void EnterPassword()
      @Test(priority = 6)
     public void EnterMPIN() throws InterruptedException {
          ExtentTest test = extent.createTest( "EnterMPIN").assignAuthor("Enter MPIN Functionality");
+         ExtentManager.setTest(test);
         // EnterEmailidTest();
          loginpage.password(Pass, passwordInput);
          enterPass(test,Pass,"Enter Valid Password","Enter MPIN","Enter MPIN");
@@ -258,6 +267,7 @@ public void EnterPassword()
     @Test
     public void RunLogin() throws InterruptedException {
         ExtentTest test = extent.createTest("Login Test").assignAuthor("Login With Valid Process");
+        ExtentManager.setTest(test);
         verify(test,null,"Login With Valid Email ID", emailaddress, null);
         loginpage.password(Pass, passwordInput);
         enterPass(test,Pass,"Enter Valid Password","Enter MPIN","Enter MPIN");
